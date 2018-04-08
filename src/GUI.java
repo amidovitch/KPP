@@ -5,22 +5,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+
 public class GUI extends Stage {
 
     private Writer writer = new Writer("George Martin");
     private Reader reader = new Reader("Dmitry Emelyanov");
+    private Book book;
 
     private Scene scene;
     private Label[] labels;
     private Button[] buttons;
     private TextField[] text;
-    private int numberBook = -1;
 
     public GUI() {
 
@@ -75,9 +75,8 @@ public class GUI extends Stage {
 
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
-                            this.writer.writeBook(new Book(Integer.parseInt(text[0].getText())));
+                            book = this.writer.writeBook(Integer.parseInt(text[0].getText()));
                             GUI.showDialogMessage("Книга написана!");
-                            numberBook++;
                             text[0].setText(null);
                         }catch (Exception ex ) {
                             GUI.showDialogMessage("WARNING!!!", "Чтобы написать книгу, сначала введите кол-во страниц");}
@@ -89,13 +88,13 @@ public class GUI extends Stage {
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
                             if(text[1].getText() != null) {
-                                reader.readBook(writer.getBook().get(numberBook), text[1].getText());
-                                GUI.showDialogMessage("Кол-во страниц в прочитанной книге = " + reader.getWriter().getBook().get(numberBook).getPages()
+                                reader.readBook(writer.getBook(), text[1].getText());
+                                GUI.showDialogMessage("Кол-во страниц в прочитанной книге = " + writer.getBook().getPages()
                                     + "\nОтзыв отправлен:\n"+text[1].getText());
                                 text[1].setText(null);
                             }
                             else {
-                                GUI.showDialogMessage("Вы не ввели отзыв!");
+                                GUI.showDialogMessage("WARNING!!!","Вы не ввели отзыв!");
                             }
                         }catch (Exception ex ) {
                             GUI.showDialogMessage("WARNING!!!", "Вы не можете прочитать книгу и оправить по ней отзыв, если она еще не написана :)");}

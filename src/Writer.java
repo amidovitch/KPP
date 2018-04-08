@@ -1,37 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Writer extends Human{
 
     private String feedback;
-
-    private List<Book> books;
-
+    private Book book;
 
     public Writer() {
         super();
         this.feedback = null;
-        this.books = new ArrayList<Book>();
+        book = new Book();
     }
 
     public Writer(String nameWriter) {
         super(nameWriter);
         this.feedback = null;
-        this.books = new ArrayList<Book>();
+        book = new Book();
     }
 
-    public boolean writeBook(Book book) {
-        if (this.books == null || book == null) return false;
-        book.setWriter(this);
-        return this.books.add(book);
+    public Book writeBook(int amountPage) {
+        this. book = new Book(amountPage);
+        this.book.setWriter(this);
+        return this.book;
     }
 
-    public List<Book> getBook() {
-        return this.books;
+    public Book getBook() {
+        return this.book;
     }
 
     public void setFeedback(String Feedback) {
         this.feedback = Feedback;
     }
-
 }
