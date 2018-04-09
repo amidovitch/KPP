@@ -1,3 +1,3 @@
 # -
-Laboratory work in KPP
+Laboratory works in KPP
 (variant 16)
