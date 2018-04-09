@@ -1,2 +1,3 @@
 # -
-Laba№2 variant 16 (with JavaFX)
+Laboratory work in KPP
+(variant 16)
