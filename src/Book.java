@@ -9,18 +9,15 @@ public class Book {
         this.writer = null;
     }
 
-    public Book(int numberOfPages) {
+    public Book(int numberOfPages, Writer writer) {
         this.numberOfPages = numberOfPages;
-        this.writer = null;
+        this.writer = writer;
     }
 
     public int getPages() {
         return this.numberOfPages;
     }
 
-    public void setWriter(Writer writer) {
-        this.writer = writer;
-    }
     public Writer getWriter() {
            return this.writer;
     }

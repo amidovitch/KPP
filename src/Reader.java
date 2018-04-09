@@ -11,10 +11,10 @@ public class Reader extends Human {
     }
 
     public void readBook(Book book, String feedback) {
-        this.giveFeedback(feedback, book);
+        this.giveFeedback(feedback, book.getWriter());
     }
 
-    public void giveFeedback(String Feedback, Book book) {
-        book.getWriter().setFeedback(Feedback);
+    public void giveFeedback(String feedback, Writer writer) {
+        writer.setFeedback(feedback);
     }
 }

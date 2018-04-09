@@ -24,7 +24,11 @@ public class GUI extends Stage {
 
     public GUI() {
 
-        this.text = new TextField[]{new TextField(null), new TextField(null)};
+        this.text = new TextField[]{
+                new TextField(null),
+                new TextField(null)
+        };
+
         this.labels = new Label[]{
                 new Label("Книжный КЛУБ"),
                 new Label("Писатель"),
@@ -32,6 +36,7 @@ public class GUI extends Stage {
                 new Label("Для ввода количества страниц"),
                 new Label("Для ввода отзыва")
         };
+
         for (int i = 0; i < 3; i++) {
             if (i == 0) {
                 this.labels[0].setFont(new Font("Arial",25));
@@ -39,6 +44,7 @@ public class GUI extends Stage {
             }
             this.labels[i].setFont(new Font(20));
         }
+
         this.buttons = new Button[]{
                 new Button("Написать книгу..."),
                 new Button("Прочитать книгу и дать отзыв"),
@@ -79,6 +85,7 @@ public class GUI extends Stage {
                             GUI.showDialogMessage("Книга написана!");
                             text[0].setText(null);
                         }catch (Exception ex ) {
+                            text[0].setText(null);
                             GUI.showDialogMessage("WARNING!!!", "Чтобы написать книгу, сначала введите кол-во страниц");}
                     });
                     break;
@@ -88,16 +95,18 @@ public class GUI extends Stage {
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
                             if(text[1].getText() != null) {
-                                reader.readBook(writer.getBook(), text[1].getText());
-                                GUI.showDialogMessage("Кол-во страниц в прочитанной книге = " + writer.getBook().getPages()
-                                    + "\nОтзыв отправлен:\n"+text[1].getText());
+                                reader.readBook(book, text[1].getText());
+                                GUI.showDialogMessage("В прочитанной книге " + writer.getBook().getPages()
+                                    + " страниц" + "\nОтзыв отправлен:\n" + "<" + text[1].getText() + ">");
                                 text[1].setText(null);
                             }
                             else {
+                                text[1].setText(null);
                                 GUI.showDialogMessage("WARNING!!!","Вы не ввели отзыв!");
                             }
                         }catch (Exception ex ) {
-                            GUI.showDialogMessage("WARNING!!!", "Вы не можете прочитать книгу и оправить по ней отзыв, если она еще не написана :)");}
+                            text[1].setText(null);
+                            GUI.showDialogMessage("WARNING!!!", "Вы не можете прочитать книгу и оправить по ней отзыв, пока она не написана :)");}
                     });
                     break;
 

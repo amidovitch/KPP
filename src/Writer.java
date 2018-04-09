@@ -17,8 +17,7 @@ public class Writer extends Human{
     }
 
     public Book writeBook(int amountPage) {
-        this. book = new Book(amountPage);
-        this.book.setWriter(this);
+        this.book = new Book(amountPage, this);
         return this.book;
     }
 
