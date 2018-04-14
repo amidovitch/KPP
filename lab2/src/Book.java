@@ -1,6 +1,6 @@
 public class Book {
 
-    int numberOfPages;
+    private int numberOfPages;
 
     private Writer writer;
 

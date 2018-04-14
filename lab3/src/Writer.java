@@ -1,27 +1,32 @@
 public class Writer extends Human{
 
-    private Book book;
+    private Book book[] = {null, null};
     private String comment;
     public Writer() {
         super();
-        book = null;
         comment = null;
     }
 
     public Writer(String nameWriter) {
         super(nameWriter);
-        book = null;
         comment = null;
     }
 
-    public Book writeBook(int typeBook, int amountPage){
-        /*/11111111111111111111111111111111111111111111111111111*/
-        return this.book;
+    public Book writeBook(int amountPage, String genreBook){
+        if(genreBook.equals("Роман")) {
+            this.book[0] = new Novel(amountPage);
+            return this.book[0];
+        }
+        else
+            if (genreBook.equals( "Рассказ")) {
+                this.book[1] = new Tale(amountPage);
+                return this.book[1];
+            }
+            return null;
     }
-    public int readBook(Book book) {
-        return book.amountPage;
-    }
-    public void setComment(String comment){
+
+    public String setComment(String comment){
         this.comment = comment;
+        return "Спасибо за отзыв, бро";
     }
 }

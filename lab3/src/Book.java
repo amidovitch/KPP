@@ -8,4 +8,7 @@ public abstract class Book {
     public Book(int amountPage){
         this.amountPage = amountPage;
     }
+    public int getAmountPage(){
+        return amountPage;
+    }
 }

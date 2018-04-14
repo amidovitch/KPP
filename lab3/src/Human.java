@@ -9,5 +9,7 @@ public abstract class Human {
         this.name = name;
     }
 
-    public abstract int readBook(Book book);
+    public int readBook(Book book) {
+        return book.amountPage;
+    }
 }

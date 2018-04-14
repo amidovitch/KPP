@@ -77,20 +77,21 @@ public class GUI extends Stage {
 
             switch (i) {
 
-                case 0:
+                case 0: //Написать книгу
 
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
+                            if(Integer.parseInt(text[0].getText()) <= 0) throw new Exception();
                             book = this.writer.writeBook(Integer.parseInt(text[0].getText()));
                             GUI.showDialogMessage("Книга написана!");
                             text[0].setText(null);
                         }catch (Exception ex ) {
                             text[0].setText(null);
-                            GUI.showDialogMessage("WARNING!!!", "Чтобы написать книгу, сначала введите кол-во страниц");}
+                            GUI.showDialogMessage("WARNING!!!", "Число страниц должно быть положительным :(");}
                     });
                     break;
 
-                case 1:
+                case 1: // Прочитать книгу и дать отзыв
 
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         try {
@@ -110,7 +111,7 @@ public class GUI extends Stage {
                     });
                     break;
 
-                case 2:
+                case 2: // Выход
                     this.buttons[i].addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         this.close();
                     });

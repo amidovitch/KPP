@@ -8,12 +8,7 @@ public class Reader extends Human {
         super(nameReader);
     }
 
-    public int readBook(Book book) {
-        return book.amountPage;
-    }
-
-    protected void giveFeedback(Writer writer, String comment) {
-        writer.setComment(comment);
-
+    protected String giveFeedback(Writer writer, String comment) {
+        return writer.setComment(comment);
     }
 }
