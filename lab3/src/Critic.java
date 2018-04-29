@@ -1,3 +1,4 @@
+
 public class Critic extends Reader {
 
     private Review review;
