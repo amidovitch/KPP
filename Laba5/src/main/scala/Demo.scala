@@ -17,32 +17,40 @@ object Demo {
         run(start + 1, finish, List())
     }
 
-    def findExtremums(list: List[Int]): (Int,Int) =  {             //(max,min)
-      if (list.isEmpty) (-1,1)
-      else {
-        if (list.tail == Nil) (list.head, list.head)
-        else {
-          if (list.head < findExtremums(list.tail)._2) (findExtremums(list.tail)._1, list.head)
-          else {
-            if (list.head > findExtremums(list.tail)._1) (list.head, findExtremums(list.tail)._2)
-            else (findExtremums(list.tail)._1, findExtremums(list.tail)._2)
-          }
-        }
-      }
+
+  def findExtremums(list: List[Int]): List[Int]= {
+    def run(previous: Int, currentList: List[Int], nextList: List[Int]): List[Int] = {
+      if (nextList.isEmpty) Nil
+      else if ((currentList.head > previous && currentList.head > nextList.head) ||)
+        currentList.head :: run(currentList.head, nextList, nextList.tail)
+      else if (currentList.head < previous && currentList.head < nextList.head)
+        currentList.head:: run(currentList.head, nextList, nextList.tail)
+      else run(currentList.head, nextList, nextList.tail)
     }
 
-  def findExtremumsTail(list: List[Int]): (Int,Int)= { //(max,min)
-    def run(list: List[Int], maximum: Int, minimum: Int): (Int, Int) = {
-      if (list.tail == Nil) (maximum, minimum)
-      else {
-        if (list.head < minimum) run(list.tail, maximum, list.head)
-        else {
-         if (list.head > maximum) run(list.tail, list.head, minimum)
-         else run(list.tail, maximum, minimum)
-        }
-      }
+    list match {
+      case Nil => Nil
+      case x :: Nil => Nil
+      case x :: xs :: Nil => Nil
+      case _ => run(list.head, list.tail, list.tail.tail)
     }
-    if (list.isEmpty) (-1,1)
-    else run(list, list.head, list.head)
+  }
+
+  def findExtremumsTail(list: List[Int]): List[Int]= {
+    def run(previous: Int, currentList: List[Int], nextList: List[Int], extremums: List[Int]): List[Int] = {
+      if (nextList.isEmpty) extremums
+      else if (currentList.head > previous && currentList.head > nextList.head)
+        run(currentList.head, nextList, nextList.tail, extremums :+ currentList.head)
+      else if (currentList.head < previous && currentList.head < nextList.head)
+        run(currentList.head, nextList, nextList.tail, extremums :+ currentList.head )
+      else run(currentList.head, nextList, nextList.tail, extremums)
+    }
+
+    list match {
+      case Nil => Nil
+      case x :: Nil => Nil
+      case x :: xs :: Nil => Nil
+      case _ => run(list.head, list.tail, list.tail.tail, List())
+    }
   }
 }
